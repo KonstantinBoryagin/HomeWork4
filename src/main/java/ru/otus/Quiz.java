@@ -1,29 +1,30 @@
 package ru.otus;
 
+/**
+ * "Викторина"
+ * @author Konstantin Boryagin
+ * @version 1.0
+ */
 public class Quiz {
-    private static QuizGenerator quizGenerator;
-    private static QuizService quizService;
-
-    /**
-     * @author Konstantin Boryagin
-     */
-    private static void init(){
-        quizGenerator = new QuizGenerator();
-        quizService = new QuizService();
-    }
 
 
     public static void main(String[] args) {
 
-        init();
+        QuizGenerator quizGenerator = new QuizGenerator();
 
         System.out.println("Добро пожаловать! Введите Ваше имя что бы начать!");
-        quizService.setPlayerName(quizGenerator.getInput().nextLine());
 
+        /** Получаем и записываем имя пользователя в {@link QuizGenerator#setPlayerName(String name)} */
+        quizGenerator.setPlayerName(quizGenerator.getInput().nextLine());
+
+        /**
+         * Вызываем метод пошагового выполнения викторины {@link QuizGenerator#quiz()}
+         * пока не будет введена "Q" для выхода из программы
+         */
         while (true) {
             quizGenerator.quiz();
 
-            System.out.println("\n Что бы выйти введите \"Q\" или что либо другое для повтора");
+            System.out.println("\n Что бы выйти введите \"Q\" или что либо другое для следующей попытки");
 
             if (quizGenerator.getInput().next().equalsIgnoreCase("q")) {
                 return;
